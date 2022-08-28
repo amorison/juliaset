@@ -16,3 +16,6 @@ cli = ["dep:image", "dep:clap"]
 [[bin]]
 name = "juliaset"
 required-features = ["cli"]
+
+[workspace]
+members = ["py-api"]
