@@ -65,7 +65,7 @@ impl JuliaDiv {
         }
     }
 
-    pub fn over(&self, plane: ComplexRegion) -> Array2<f64> {
+    pub fn over(&self, plane: &ComplexRegion) -> Array2<f64> {
         let (itermin, itermax) = self.n_iterations;
         let thres_sqr = self.threshold.powi(2);
         plane.build(self.resolution).mapv_into_any(|mut z_s| {
