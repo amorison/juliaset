@@ -1,0 +1,3 @@
+# juliaset
+
+Julia set calculator.
