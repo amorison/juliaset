@@ -56,7 +56,7 @@ fn main() {
         (args.itermin, args.itermax),
         args.resolution,
     );
-    let img = julia_div.over(area);
+    let img = julia_div.over(&area);
     let img = img.t().map(|lum| (lum * 255.0) as u8);
     image::save_buffer(
         "plot.png",
