@@ -3,46 +3,46 @@ use juliaset::{ComplexRegion, JuliaDiv};
 use num_complex::Complex64;
 
 #[derive(Parser)]
-#[clap(author, version, about, long_about = None)]
+#[command(author, version, about, long_about = None)]
 struct Args {
     /// Number of pixels in real (x) direction
-    #[clap(short = 'R', long, value_parser, default_value_t = 500)]
+    #[arg(short = 'R', long, default_value_t = 500)]
     resolution: usize,
 
     /// Real (x) value on left side of image
-    #[clap(short, long, value_parser, default_value_t = -1.6)]
+    #[arg(short, long, default_value_t = -1.6)]
     xleft: f64,
 
     /// Real (x) value on right side of image
-    #[clap(short = 'X', long, value_parser, default_value_t = 1.6)]
+    #[arg(short = 'X', long, default_value_t = 1.6)]
     xright: f64,
 
     /// Imaginary (y) value on bottom side of image
-    #[clap(short, long, value_parser, default_value_t = -1.0)]
+    #[arg(short, long, default_value_t = -1.0)]
     ybot: f64,
 
     /// Imaginary (y) value on top side of image
-    #[clap(short = 'Y', long, value_parser, default_value_t = 1.0)]
+    #[arg(short = 'Y', long, default_value_t = 1.0)]
     ytop: f64,
 
     /// Real part of constant
-    #[clap(short = 'r', long, value_parser, default_value_t = -0.835)]
+    #[arg(short, long, default_value_t = -0.835)]
     real: f64,
 
     /// Imaginary part of constant
-    #[clap(short = 'i', long, value_parser, default_value_t = -0.2321)]
+    #[arg(short, long, default_value_t = -0.2321)]
     imag: f64,
 
     /// Threshold for divergence
-    #[clap(short = 't', long, value_parser, default_value_t = 2.0)]
+    #[arg(short, long, default_value_t = 2.0)]
     threshold: f64,
 
     /// Minimum number of iterations for coloring
-    #[clap(short = 'm', long, value_parser, default_value_t = 5)]
+    #[arg(short = 'm', long, default_value_t = 5)]
     itermin: usize,
 
     /// Maximum number of iterations
-    #[clap(short = 'M', long, value_parser, default_value_t = 80)]
+    #[arg(short = 'M', long, default_value_t = 80)]
     itermax: usize,
 }
 
