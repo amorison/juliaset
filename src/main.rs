@@ -1,4 +1,7 @@
+use std::{fs::File, io::BufWriter};
+
 use clap::Parser;
+use image::ImageEncoder;
 use juliaset::{ComplexRegion, JuliaDiv};
 use num_complex::Complex64;
 
@@ -58,8 +61,14 @@ fn main() {
     );
     let img = julia_div.over(&area);
     let img = img.t().map(|lum| (lum * 255.0) as u8);
-    image::save_buffer(
-        "plot.png",
+    let file = File::create("plot.png").expect("could not create output file");
+    let file = BufWriter::new(file);
+    let png_enc = image::codecs::png::PngEncoder::new_with_quality(
+        file,
+        image::codecs::png::CompressionType::Best,
+        image::codecs::png::FilterType::NoFilter,
+    );
+    png_enc.write_image(
         img.as_standard_layout().as_slice().unwrap(),
         img.shape()[1]
             .try_into()
