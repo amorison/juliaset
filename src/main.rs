@@ -47,6 +47,10 @@ struct Args {
     /// Maximum number of iterations
     #[arg(short = 'M', long, default_value_t = 80)]
     itermax: usize,
+
+    /// Minimal compression for faster output
+    #[arg(long)]
+    fast: bool,
 }
 
 fn main() {
@@ -65,7 +69,11 @@ fn main() {
     let file = BufWriter::new(file);
     let png_enc = image::codecs::png::PngEncoder::new_with_quality(
         file,
-        image::codecs::png::CompressionType::Best,
+        if args.fast {
+            image::codecs::png::CompressionType::Fast
+        } else {
+            image::codecs::png::CompressionType::Best
+        },
         image::codecs::png::FilterType::NoFilter,
     );
     png_enc.write_image(
